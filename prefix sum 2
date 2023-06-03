@@ -1,0 +1,39 @@
+n, m = [int(i) for i in input().split()]
+f = []
+print(n, m)
+for i in range(n):
+    f.append([int(i) for i in input().split()])
+s = [[0] * m for i in range(n)]
+i1, j1, i2, j2 = [int(i) for i in input().split()]
+print()
+
+for i in range(len(f)):
+    for j in range(len(f[i])):
+        su = f[i][j]
+        if i != 0:
+            su += s[i-1][j]
+        if j != 0:
+            su += s[i][j-1]
+        if i != 0 and j != 0:
+            su -= s[i-1][j-1]
+        s[i][j] = su
+    print(*s[i])
+print()
+print(s[0][0])
+print(i1, j1, i2, j2)
+print()
+for i in range(i1, i2):
+    for j in range(j1, j2):
+        print(f[i][j], end=' ')
+    print()
+
+ot = s[i2][j2]
+if i1 != 0:
+    ot -= s[i1-1][j2]
+if j1 != 0:
+    ot -= s[i2][j1-1]
+if i1 != 0 and j1 != 0:
+    ot += s[i1-1][j1-1]
+print()
+print(ot, s[i2][j2], s[i1-1][j2], s[i2][j1-1], s[i1-1][j1-1])
+#print(f'{i2} {j2} | {i1 - 1} {j2} | {i2} {j1 - 1} | {i1 - 1} {j1 - 1}')
